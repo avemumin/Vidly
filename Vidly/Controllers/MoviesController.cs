@@ -23,6 +23,11 @@ namespace Vidly.Controllers
             return View(movies);
         }
 
+        protected override void Dispose(bool disposing)
+        {
+            _context.Dispose();
+        }
+
         public ActionResult New()
         {
             var genres = _context.Genres.ToList();
