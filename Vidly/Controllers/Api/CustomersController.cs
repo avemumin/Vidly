@@ -4,6 +4,10 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using AutoMapper;
+using AutoMapper.QueryableExtensions;
+using Vidly.App_Start;
+using Vidly.Dtos;
 using Vidly.Models;
 using AppContext = Vidly.Models.AppContext;
 
@@ -13,15 +17,19 @@ namespace Vidly.Controllers.Api
     public class CustomersController : ApiController
     {
         private AppContext _context;
+      //  public IMapper _mapper;
 
         public CustomersController()
         {
             _context = new AppContext();
+            //_mapper = mapper;
         }
         //Get /api/customers
         public IEnumerable<Customer> GetCustomers()
         {
-            return _context.Customers.ToList();
+            var results = _context.Customers.ToList();
+          //  var mappedEntityies = _mapper.Map<CustomerDto>(results);
+            return results;
         }
         //Get /api/customers
         public Customer GetCustomer(int id)
